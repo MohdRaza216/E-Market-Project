@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "MERN Stack Application",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon backend/server.js" 
+    "dev": "nodemon backend/server.js"
   },
   "keywords": [
     "backend",
