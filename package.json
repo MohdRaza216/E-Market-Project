@@ -6,8 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon backend/server.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "cross-env NODE_ENV=production node backend/server.js"
+    "build": "rimraf frontend/build && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "cross-env NODE_ENV=production node backend/server.js",
+    "lint": "eslint 'backend/**/*.js'",
+    "format": "prettier --write 'backend/**/*.js'",
+    "check:deps": "npm-check"
   },
   "keywords": [
     "backend",
@@ -28,7 +31,14 @@
     "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.13.0",
     "cross-env": "^7.0.3",
-    "nodemon": "^3.1.7"
+    "eslint": "^9.13.0",
+    "eslint-plugin-react": "^7.37.2",
+    "globals": "^15.11.0",
+    "nodemon": "^3.1.7",
+    "npm-check": "^6.0.1",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1"
   }
 }
