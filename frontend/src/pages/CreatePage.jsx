@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useProductStore } from "../store/product";
+import { useNavigate } from "react-router-dom";
 
 const CreatePage = () => {
   const [newProduct, setNewProduct] = useState({
@@ -18,27 +19,45 @@ const CreatePage = () => {
     image: "",
   });
   const toast = useToast();
+  const navigate = useNavigate();
 
   const { createProduct } = useProductStore();
 
   const handleAddProduct = async () => {
-    const { success, message } = await createProduct(newProduct);
-    if (!success) {
+    try {
+      console.log("Attempting to create product:", newProduct);
+      const { success, message } = await createProduct(newProduct);
+      console.log("Create product result:", { success, message });
+
+      if (!success) {
+        toast({
+          title: "Error",
+          description: message || "Failed to create product",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: message || "Product created successfully",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        setNewProduct({ name: "", price: "", image: "" });
+        navigate('/');
+      }
+    } catch (error) {
+      console.error("Error in handleAddProduct:", error);
       toast({
         title: "Error",
-        description: message,
+        description: "An unexpected error occurred",
         status: "error",
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: "Success",
-        description: message,
-        status: "success",
+        duration: 3000,
         isClosable: true,
       });
     }
-    setNewProduct({ name: "", price: "", image: "" });
   };
 
   return (
@@ -91,4 +110,5 @@ const CreatePage = () => {
     </Container>
   );
 };
+
 export default CreatePage;

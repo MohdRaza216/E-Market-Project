@@ -11,4 +11,12 @@ export default defineConfig({
       },
     },
   },
-});
+  outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: './index.html',
+      },
+    },
+  },
+);
