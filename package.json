@@ -4,13 +4,16 @@
   "description": "MERN Stack Application",
   "main": "index.js",
   "type": "module",
+  "homepage": "https://MohdRaza216.github.io/E-Market-Project/",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon backend/server.js",
     "build": "rimraf frontend/build && npm install --prefix frontend && npm run build --prefix frontend",
     "start": "cross-env NODE_ENV=production node backend/server.js",
     "lint": "eslint 'backend/**/*.js'",
     "format": "prettier --write 'backend/**/*.js'",
-    "check:deps": "npm-check"
+    "check:deps": "npm-check",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d frontend/dist"
   },
   "keywords": [
     "backend",
@@ -36,6 +39,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^9.13.0",
     "eslint-plugin-react": "^7.37.2",
+    "gh-pages": "^6.2.0",
     "globals": "^15.11.0",
     "nodemon": "^3.1.7",
     "npm-check": "^6.0.1",
